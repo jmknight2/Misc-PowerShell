@@ -1,7 +1,30 @@
 ﻿Function Play-RPSLS {
+    <#
+        .Synopsis
+        The game of Rock Paper Scissors Lizard Spock played via PowerShell
+
+        .Parameter PlayerChoice
+        Only valid options will be accepted.
+
+        .Example
+        Play-RPSLS -PlayerChoice Rock
+
+        Sample output:
+
+        ===========================================
+
+        You lose!
+        (Spock vaporizes rock)
+
+        ===========================================
+
+        You Chose Computer Chose
+        --------- --------------
+        Rock      Spock
+    #>
     [CmdletBinding()]
     Param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$true, Position=0)]
         [ValidateSet('Rock', 'Paper', 'Scissors', 'Lizard', 'Spock')]
         [string]$PlayerChoice
     )
