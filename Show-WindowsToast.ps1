@@ -1,3 +1,5 @@
+# Based on the sample code provided by Github User altrive: https://github.com/altrive
+# Source Gist: https://gist.github.com/altrive/72594b8427b2fff16431
 Function Show-WindowsToast {
     [CmdletBinding()]
     param(
