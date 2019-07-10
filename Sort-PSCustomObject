@@ -7,7 +7,7 @@ Function Sort-PsCustomObject {
     The PSCustomObject which you want to sort.
 
     .Notes
-    Complete attribution of this code goes to GitHub user: mklement0
+    Complete attribution of this code goes to StackOverflow user: mklement0
     Source: https://stackoverflow.com/a/44056862/7838933
     #>
 
