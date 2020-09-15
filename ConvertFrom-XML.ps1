@@ -32,11 +32,17 @@ Function ConvertFrom-XML {
 
         foreach($Prop in $Properties) {
             if($Prop.Definition.Split(' ')[0] -like '*xml*') {
-                $Obj | Add-Member -NotePropertyName $Prop.Name -NotePropertyValue (ConvertFrom-XML -XMLBlob $XMLBlob.$($Prop.Name))
+                $Obj | Add-Member -NotePropertyName $Prop.Name.Trim('#') -NotePropertyValue (ConvertFrom-XML -XMLBlob $XMLBlob.$($Prop.Name))
             } elseif($Prop.name -like '*#cdata-section*') {
                 $Dataval = $XMLBlob.$($Prop.Name)
+            } elseif($XMLBlob.$($Prop.Name) -is [array]) {
+                $tempArray = [System.Collections.ArrayList]@()
+                foreach($item in $XMLBlob.$($Prop.Name)) {
+                    [void]$tempArray.Add($(ConvertFrom-XML -XMLBlob $item))
+                }
+                $Obj | Add-Member -NotePropertyName $Prop.Name.Trim('#') -NotePropertyValue $tempArray
             } else {
-                $Obj | Add-Member -NotePropertyName $Prop.Name -NotePropertyValue $XMLBlob.$($Prop.Name)
+                $Obj | Add-Member -NotePropertyName $Prop.Name.Trim('#') -NotePropertyValue $XMLBlob.$($Prop.Name)
             }
         }
 
